@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="example.css">
+<title>VIP</title>
+ <style>
+        body { --primary: black; --secondary: #29b6f6; margin: 0px; }
+        * {font-family: 'Roboto', sans-serif;}
+        button { 
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            text-decoration: none;
+            margin: 2px;
+            color: var(--primary);
+            background: white;
+            border: white;
+            height: 20px;
+            font-size: 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: ease-in 0.2s all;
+            padding: 0 8px 0 8px;
+        }
+        div#main {padding: 10px;}
+        input {margin-bottom: 5px; margin-top: 2px; padding: 4px; font-size: 12px; }
+        h1 {background: var(--primary); color: white; font-weight: 300; text-transform: uppercase; font-size: 20px; margin: 0px; padding: 15px;}
+        h2 { margin-block-start: 0px; margin-block-end: 10px; font-size: 20px;  color: var(--primary);}
+/       button:hover { background: var(--primary); color: white; } 
+       .Primeros { 
+   display: flex; 
+   justify-content: space-between; 
+   border: 5px outset purple; 
+   background-color: lightblue; 
+   text-align: center; 
+  } 
+  .Subvista {
+  display: inline-block;
+/*   justify-content: space-between; */
+  border: 5px outset purple;
+  background-color: lightblue;
+  text-align: center;
+  }
+  .FotoPrincipal{
+    text-align: center;
+  
+}.letral{
+    text-align: center;
+  font: small-caps bold 120% garamon;
+}
+table {
+    border-collapse: collapse;
+    border: 1px solid #843EBE;
+  }
+  
+  td,
+  th {
+    padding: 10px;
+  }
+  
+   th {
+    background: #fff;
+    color: #843EBE;
+    text-transform: uppercase;
+  }
+    td {
+    text-align: center;
+    border-bottom: 2px solid #111;
+    color: #843EBE;
+    font-size: 18px;
+  }
+  .centrado{margin: 1rem;
+  
+  padding: 1rem;
+  text-aling:centre}
+
+    </style>
+</head>
+
+
+<body>
+	<header>
+		<h1 class="FotoPrincipal">VIP</h1>
+	
+	</header>
+	
+	<section>
+	<br><br><br><br>
+	<h2 class="letral">Porque los deseos se piden a la cara y no a las estrellas.</h2>
+	<br><br>
+		<div class="FotoPrincipal">
+			
+			<button onclick="procesar()" id="procesar">Escuchar</button>
+			
+			
+		</div>
+	
+ <div class= FotoPrincipal>
+<h3><textarea id="texto" rows= "5" cols= "60">Pideme cualquier petición, para ello pulsa escuchar</textarea></h3></div>
+<form action="FormLogoutServlet">
+     
+        <div class= FotoPrincipal>
+<br>
+        <button type="submit" ><img src="Imagenes/LOGOUTDEFINITIVOO.png" width=200 height=200 alt="x"/></button></div>
+
+</form>
+	</section>
+</body>
+
+
+
+<script type="text/javascript">
+
+	var recognition;
+	var recognizing = false;
+	if (!('webkitSpeechRecognition' in window)) {
+		alert("¡API no soportada!");
+	} else {
+
+		recognition = new webkitSpeechRecognition();
+		recognition.lang = "es-VE";
+		recognition.continuous = true;
+		recognition.interimResults = true;
+
+		recognition.onstart = function() {
+			recognizing = true;
+			console.log("empezando a eschucar");
+			
+		}
+		recognition.onresult = function(event) {
+
+		 for (var i = event.resultIndex; i < event.results.length; i++) {
+			if(event.results[i].isFinal)
+				document.getElementById("texto").value = event.results[i][0].transcript;
+		    }
+			
+			//texto
+		}
+		recognition.onerror = function(event) {
+		}
+		recognition.onend = function() {
+			recognizing = false;
+			document.getElementById("procesar").innerHTML = "Escuchar";
+			console.log("terminó de eschucar, llegó a su fin");
+		
+
+
+		}
+
+	}
+
+	function procesar() {
+
+		if (recognizing == false) {
+			recognition.start();
+			recognizing = true;
+			document.getElementById("procesar").innerHTML = "Detener";
+		} else {
+			recognition.stop();
+			recognizing = false;
+			document.getElementById("procesar").innerHTML = "Escuchar";
+			alert("Se está tramitando su pedido");
+		}
+	}
+</script>
+
+
+
+
+
+</html>
